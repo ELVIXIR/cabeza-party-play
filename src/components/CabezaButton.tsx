@@ -4,12 +4,13 @@ import { cn } from '@/lib/utils';
 
 interface CabezaButtonProps {
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (e?: React.MouseEvent) => void;
   variant?: 'primary' | 'secondary' | 'outline';
   size?: 'small' | 'medium' | 'large';
   className?: string;
   disabled?: boolean;
   icon?: React.ReactNode;
+  type?: 'button' | 'submit' | 'reset';
 }
 
 const CabezaButton: React.FC<CabezaButtonProps> = ({
@@ -19,7 +20,8 @@ const CabezaButton: React.FC<CabezaButtonProps> = ({
   size = 'medium',
   className = '',
   disabled = false,
-  icon
+  icon,
+  type = 'button'
 }) => {
   const variantClasses = {
     primary: 'bg-cabeza-primary hover:bg-red-600 text-white',
@@ -35,6 +37,7 @@ const CabezaButton: React.FC<CabezaButtonProps> = ({
   
   return (
     <button
+      type={type}
       onClick={onClick}
       disabled={disabled}
       className={cn(

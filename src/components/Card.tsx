@@ -66,7 +66,7 @@ const Card: React.FC<CardProps> = ({
                   variant="outline" 
                   size="small"
                   onClick={(e) => {
-                    e.stopPropagation();
+                    if (e) e.stopPropagation();
                     handleFlip();
                   }}
                 >
@@ -77,7 +77,7 @@ const Card: React.FC<CardProps> = ({
                   variant="primary" 
                   size="small"
                   onClick={(e) => {
-                    e.stopPropagation();
+                    if (e) e.stopPropagation();
                     if (onNextPlayer) onNextPlayer();
                   }}
                 >
