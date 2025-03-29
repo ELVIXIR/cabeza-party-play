@@ -1,6 +1,5 @@
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { GameRules } from '@/lib/gameRules';
+import { GameRules, GameRule, getStandardRules } from '@/lib/gameRules';
 
 type Player = {
   id: string;
@@ -27,6 +26,9 @@ type GameContextType = {
   cursedPot: number;
   addToCursedPot: (amount: number) => void;
   drinkCursedPot: () => number;
+  selectedRules: Record<string, boolean>;
+  setSelectedRules: (rules: Record<string, boolean>) => void;
+  getActiveRules: () => GameRule[];
 };
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
@@ -41,6 +43,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({
   const [isPremium, setIsPremium] = useState(false);
   const [drawnCards, setDrawnCards] = useState<string[]>([]);
   const [cursedPot, setCursedPot] = useState(0);
+  const [selectedRules, setSelectedRules] = useState<Record<string, boolean>>({});
 
   // Load saved state from localStorage
   useEffect(() => {
@@ -50,6 +53,10 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({
       setSoundEnabled(parsedSettings.soundEnabled);
       setLanguage(parsedSettings.language);
       setIsPremium(parsedSettings.isPremium);
+      
+      if (parsedSettings.selectedRules) {
+        setSelectedRules(parsedSettings.selectedRules);
+      }
     }
   }, []);
 
@@ -58,9 +65,25 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({
     localStorage.setItem('cabezaSettings', JSON.stringify({
       soundEnabled,
       language,
-      isPremium
+      isPremium,
+      selectedRules
     }));
-  }, [soundEnabled, language, isPremium]);
+  }, [soundEnabled, language, isPremium, selectedRules]);
+
+  // Fonction pour obtenir les règles actives pour la partie
+  const getActiveRules = (): GameRule[] => {
+    // Si aucune règle n'est sélectionnée ou si l'utilisateur n'est pas premium,
+    // utiliser toutes les règles standard
+    if (!isPremium || Object.keys(selectedRules).length === 0) {
+      return getStandardRules();
+    }
+    
+    // Sinon, utiliser les règles sélectionnées
+    return Object.keys(selectedRules)
+      .filter(ruleId => selectedRules[ruleId])
+      .map(ruleId => GameRules[ruleId])
+      .filter(Boolean);
+  };
 
   const addPlayer = (name: string) => {
     if (players.length < 12) {
@@ -76,30 +99,27 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({
     setCurrentPlayerIndex((currentPlayerIndex + 1) % players.length);
   };
 
-  const resetGame = () => {
-    setPlayers([]);
-    setCurrentPlayerIndex(0);
-    setDrawnCards([]);
-    setCursedPot(0);
-  };
-
   const drawCard = () => {
-    // Get available rules (not drawn yet)
-    const availableRules = Object.keys(GameRules).filter(
+    // Obtenir les règles actives pour la partie actuelle
+    const activeRules = getActiveRules();
+    const activeRuleIds = activeRules.map(rule => rule.id);
+    
+    // Filtrer les règles disponibles (pas encore tirées)
+    const availableRules = activeRuleIds.filter(
       ruleId => !drawnCards.includes(ruleId)
     );
     
-    // If all cards have been drawn, reset the deck
+    // Si toutes les cartes ont été tirées, réinitialiser le paquet
     if (availableRules.length === 0) {
       setDrawnCards([]);
       return drawCard();
     }
     
-    // Draw a random card from available rules
+    // Tirer une carte aléatoire parmi les règles disponibles
     const randomIndex = Math.floor(Math.random() * availableRules.length);
     const drawnCard = availableRules[randomIndex];
     
-    // Add to drawn cards
+    // Ajouter aux cartes tirées
     setDrawnCards([...drawnCards, drawnCard]);
     
     return drawnCard;
@@ -113,6 +133,13 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({
     const amount = cursedPot;
     setCursedPot(0);
     return amount;
+  };
+
+  const resetGame = () => {
+    setPlayers([]);
+    setCurrentPlayerIndex(0);
+    setDrawnCards([]);
+    setCursedPot(0);
   };
 
   return (
@@ -136,7 +163,10 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({
         drawCard,
         cursedPot,
         addToCursedPot,
-        drinkCursedPot
+        drinkCursedPot,
+        selectedRules,
+        setSelectedRules,
+        getActiveRules
       }}
     >
       {children}

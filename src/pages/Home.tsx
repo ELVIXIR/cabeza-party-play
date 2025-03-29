@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from '@/components/Logo';
 import CabezaButton from '@/components/CabezaButton';
-import { Play, Settings, ShoppingBag } from 'lucide-react';
+import { Play, Settings, ShoppingBag, List } from 'lucide-react';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -20,6 +20,15 @@ const Home: React.FC = () => {
             icon={<Play size={20} />}
           >
             Lancer une partie
+          </CabezaButton>
+          
+          <CabezaButton 
+            onClick={() => navigate('/rules-list')}
+            variant="secondary"
+            className="w-full"
+            icon={<List size={20} />}
+          >
+            Règles du jeu
           </CabezaButton>
           
           <CabezaButton 

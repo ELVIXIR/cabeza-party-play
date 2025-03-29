@@ -1,4 +1,3 @@
-
 export type GameRule = {
   id: string;
   title: string;
@@ -6,6 +5,7 @@ export type GameRule = {
   instructions: string;
   category: 'action' | 'social' | 'drinking' | 'challenge';
   difficulty: 1 | 2 | 3; // 1 = easy, 3 = hard
+  isPremium?: boolean; // Nouvelle propriété pour indiquer si la règle est premium
 };
 
 export const GameRules: Record<string, GameRule> = {
@@ -160,5 +160,63 @@ export const GameRules: Record<string, GameRule> = {
     instructions: 'Raconte une histoire d\'au moins 30 secondes en incluant trois mots choisis aléatoirement. Si tu échoues ou hésites trop, bois deux gorgées.',
     category: 'challenge',
     difficulty: 3
+  },
+  diceRoulette: {
+    id: 'diceRoulette',
+    title: 'DICE ROULETTE',
+    description: 'Le hasard du dé détermine ton sort.',
+    instructions: 'Lance un dé. Si tu obtiens 1-2: bois un shot. Si tu obtiens 3-4: choisis quelqu\'un qui boit. Si tu obtiens 5-6: tout le monde boit sauf toi.',
+    category: 'drinking',
+    difficulty: 2,
+    isPremium: true
+  },
+  wordChain: {
+    id: 'wordChain',
+    title: 'WORD CHAIN',
+    description: 'Enchaîne les mots sans pause.',
+    instructions: 'À tour de rôle, chaque joueur doit dire un mot commençant par la dernière lettre du mot précédent. Temps de réflexion: 3 secondes max. Le perdant boit un shot.',
+    category: 'challenge',
+    difficulty: 2,
+    isPremium: true
+  },
+  mirrorMaster: {
+    id: 'mirrorMaster',
+    title: 'MIRROR MASTER',
+    description: 'Imite parfaitement.',
+    instructions: 'Tu dois imiter les gestes d\'un autre joueur de ton choix jusqu\'à ton prochain tour. Chaque fois que tu échoues à imiter correctement, tu bois.',
+    category: 'action',
+    difficulty: 2,
+    isPremium: true
+  },
+  secretWord: {
+    id: 'secretWord',
+    title: 'SECRET WORD',
+    description: 'Évite le mot interdit.',
+    instructions: 'Les autres joueurs choisissent un mot courant que tu ne devras pas prononcer jusqu\'à ton prochain tour. Si tu le dis, tu bois un shot.',
+    category: 'challenge',
+    difficulty: 3,
+    isPremium: true
+  },
+  personalAssistant: {
+    id: 'personalAssistant',
+    title: 'PERSONAL ASSISTANT',
+    description: 'Sers les autres.',
+    instructions: 'Jusqu\'à ton prochain tour, tu dois servir les boissons à toute personne qui te le demande. Si tu refuses, tu bois deux gorgées à chaque refus.',
+    category: 'social',
+    difficulty: 1,
+    isPremium: true
   }
+};
+
+// Fonctions utilitaires pour filtrer les règles
+export const getStandardRules = () => {
+  return Object.values(GameRules).filter(rule => !rule.isPremium);
+};
+
+export const getPremiumRules = () => {
+  return Object.values(GameRules).filter(rule => rule.isPremium);
+};
+
+export const getAllRules = () => {
+  return Object.values(GameRules);
 };

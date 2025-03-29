@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import AddPlayers from "./pages/AddPlayers";
 import Partners from "./pages/Partners";
 import Settings from "./pages/Settings";
+import RulesList from "./pages/RulesList";
 import GameTransition from "./pages/GameTransition";
 import GameStart from "./pages/GameStart";
 import CardPile from "./pages/CardPile";
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/add-players" element={<AddPlayers />} />
             <Route path="/partners" element={<Partners />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/rules-list" element={<RulesList />} />
             <Route path="/game-transition" element={<GameTransition />} />
             <Route path="/game-start" element={<GameStart />} />
             <Route path="/card-pile" element={<CardPile />} />
