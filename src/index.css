@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -35,19 +36,12 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -94,8 +88,55 @@
   * {
     @apply border-border;
   }
-
   body {
-    @apply bg-background text-foreground;
+    @apply bg-cabeza-dark text-cabeza-light;
+    font-family: 'Poppins', sans-serif;
   }
+}
+
+@layer components {
+  .cabeza-button {
+    @apply bg-cabeza-primary hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg;
+  }
+  
+  .cabeza-card {
+    @apply bg-gradient-to-br from-cabeza-dark to-gray-900 rounded-xl p-5 shadow-xl border-2 border-cabeza-primary;
+    perspective: 1000px;
+  }
+  
+  .cabeza-title {
+    @apply text-4xl font-extrabold text-cabeza-primary tracking-wider;
+  }
+  
+  .cabeza-subtitle {
+    @apply text-xl font-bold text-cabeza-secondary;
+  }
+}
+
+/* Animation for card flip */
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.card-flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-back {
+  transform: rotateY(180deg);
 }
