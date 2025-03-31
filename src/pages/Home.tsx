@@ -3,7 +3,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from '@/components/Logo';
 import CabezaButton from '@/components/CabezaButton';
-import BottleLampLogo from '@/components/BottleLampLogo';
 import { Play, Settings, ShoppingBag, List } from 'lucide-react';
 
 const Home: React.FC = () => {
@@ -11,11 +10,6 @@ const Home: React.FC = () => {
   
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-cabeza-dark">
-      {/* Logo Bottle Lamp dans l'angle droit */}
-      <div className="absolute top-4 right-4 animate-pulse-strong">
-        <BottleLampLogo />
-      </div>
-      
       <div className="animate-slide-up max-w-md w-full mx-auto text-center">
         <Logo size="large" className="mb-12" />
         

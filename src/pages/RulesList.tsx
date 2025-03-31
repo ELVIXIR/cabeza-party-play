@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGame } from '@/context/GameContext';
-import { getStandardRules, getPremiumRules, getAllRules } from '@/lib/gameRules';
+import { getStandardRules, getPremiumRules } from '@/lib/gameRules';
 import Logo from '@/components/Logo';
 import CabezaButton from '@/components/CabezaButton';
 import Card from '@/components/Card';
@@ -13,7 +13,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 const RulesList: React.FC = () => {
   const navigate = useNavigate();
   const { isPremium } = useGame();
-  const [activeTab, setActiveTab] = useState<string>("all");
+  const [activeTab, setActiveTab] = useState<string>("standard");
   const [selectedRules, setSelectedRules] = useState<Record<string, boolean>>({});
   const [showFilters, setShowFilters] = useState(false);
   const [difficultyFilter, setDifficultyFilter] = useState<number[]>([1, 2, 3]);
@@ -21,19 +21,10 @@ const RulesList: React.FC = () => {
 
   const standardRules = getStandardRules();
   const premiumRules = getPremiumRules();
-  const allRules = getAllRules();
 
   const visibleRules = () => {
-    let rules = [];
+    let rules = activeTab === "standard" ? standardRules : premiumRules;
     
-    if (activeTab === "standard") {
-      rules = standardRules;
-    } else if (activeTab === "premium") {
-      rules = premiumRules;
-    } else {
-      rules = allRules;
-    }
-
     // Appliquer les filtres
     return rules.filter(rule => 
       difficultyFilter.includes(rule.difficulty) && 
@@ -144,49 +135,11 @@ const RulesList: React.FC = () => {
           </div>
         )}
         
-        <Tabs defaultValue="all" className="w-full mb-6" onValueChange={setActiveTab}>
-          <TabsList className="grid grid-cols-3 mb-4">
-            <TabsTrigger value="all">Toutes</TabsTrigger>
+        <Tabs defaultValue="standard" className="w-full mb-6" onValueChange={setActiveTab}>
+          <TabsList className="grid grid-cols-2 mb-4">
             <TabsTrigger value="standard">Standard</TabsTrigger>
             <TabsTrigger value="premium">Premium</TabsTrigger>
           </TabsList>
-          
-          <TabsContent value="all" className="space-y-4">
-            {visibleRules().map(rule => (
-              <div key={rule.id} className="relative">
-                {rule.isPremium && !isPremium && (
-                  <div className="absolute top-4 right-4 z-10">
-                    <Lock className="text-cabeza-secondary" size={24} />
-                  </div>
-                )}
-                <div 
-                  className={`cursor-pointer ${rule.isPremium && !isPremium ? 'opacity-50' : ''}`}
-                  onClick={() => toggleRuleSelection(rule.id)}
-                >
-                  <Card 
-                    rule={rule} 
-                    showButtons={false}
-                  />
-                  {isPremium && (
-                    <div className="flex justify-end mt-2">
-                      <button 
-                        className="flex items-center text-sm text-gray-300"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          toggleRuleSelection(rule.id);
-                        }}
-                      >
-                        {selectedRules[rule.id] ? 
-                          <><CheckSquare size={18} className="mr-1 text-cabeza-secondary" /> Sélectionnée</> : 
-                          <><Square size={18} className="mr-1" /> Sélectionner</>
-                        }
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
-          </TabsContent>
           
           <TabsContent value="standard" className="space-y-4">
             {visibleRules().map(rule => (
@@ -198,6 +151,7 @@ const RulesList: React.FC = () => {
                   <Card 
                     rule={rule} 
                     showButtons={false}
+                    isFlipped={true}
                   />
                   {isPremium && (
                     <div className="flex justify-end mt-2">
@@ -239,6 +193,7 @@ const RulesList: React.FC = () => {
                   <Card 
                     rule={rule} 
                     showButtons={false}
+                    isFlipped={true}
                   />
                   <div className="flex justify-end mt-2">
                     <button 

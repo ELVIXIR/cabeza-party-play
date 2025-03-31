@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GameRule } from '@/lib/gameRules';
 import Logo from './Logo';
 import CabezaButton from './CabezaButton';
@@ -9,15 +9,21 @@ interface CardProps {
   onFlip?: () => void;
   onNextPlayer?: () => void;
   showButtons?: boolean;
+  isFlipped?: boolean;
 }
 
 const Card: React.FC<CardProps> = ({ 
   rule, 
   onFlip, 
   onNextPlayer,
-  showButtons = true
+  showButtons = true,
+  isFlipped: defaultIsFlipped = false
 }) => {
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(defaultIsFlipped);
+  
+  useEffect(() => {
+    setIsFlipped(defaultIsFlipped);
+  }, [defaultIsFlipped]);
 
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
@@ -39,17 +45,36 @@ const Card: React.FC<CardProps> = ({
       onClick={handleFlip}
     >
       <div className="card-inner h-full">
-        <div className="card-front rounded-xl bg-gradient-to-br from-cabeza-dark to-gray-900 flex flex-col items-center justify-center p-5">
-          <Logo size="large" className="mb-6" />
-          <div className="w-20 h-20 bg-cabeza-primary rounded-full flex items-center justify-center animate-pulse-strong">
-            <span className="text-white text-xl font-bold">FLIP</span>
+        {!rule ? (
+          // Carte sans règle (pile de cartes)
+          <div className="card-front rounded-xl bg-gradient-to-br from-cabeza-dark to-gray-900 flex flex-col items-center justify-center p-5">
+            <Logo size="large" className="mb-6" />
+            <div className="w-20 h-20 bg-cabeza-primary rounded-full flex items-center justify-center animate-pulse-strong">
+              <span className="text-white text-xl font-bold">FLIP</span>
+            </div>
           </div>
-        </div>
+        ) : (
+          // Recto de la carte avec le titre de la règle
+          <div className="card-front rounded-xl bg-gradient-to-br from-cabeza-dark to-gray-900 flex flex-col items-center justify-center p-5">
+            <div className="category-badge px-3 py-1 rounded-full text-xs font-bold mb-4" 
+                 style={{ backgroundColor: getDifficultyColor(rule.difficulty) }}>
+              {rule.category.toUpperCase()}
+            </div>
+            
+            <h1 className="cabeza-title text-4xl font-bold text-cabeza-secondary mb-4">{rule.title}</h1>
+            <p className="cabeza-subtitle text-xl mb-6">{rule.description}</p>
+            
+            <div className="bg-cabeza-primary rounded-full px-4 py-2 text-white text-sm animate-pulse-slow">
+              Touchez pour voir les détails
+            </div>
+          </div>
+        )}
         
         {rule && (
+          // Verso de la carte avec les détails de la règle
           <div className="card-back rounded-xl bg-gradient-to-br from-cabeza-dark to-gray-900 flex flex-col items-center justify-between p-5 text-center">
             <div className="category-badge px-3 py-1 rounded-full text-xs font-bold mb-2" 
-                style={{ backgroundColor: getDifficultyColor(rule.difficulty) }}>
+                 style={{ backgroundColor: getDifficultyColor(rule.difficulty) }}>
               {rule.category.toUpperCase()}
             </div>
             
