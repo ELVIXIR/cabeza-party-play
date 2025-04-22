@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGame } from '@/context/GameContext';
 import Logo from '@/components/Logo';
-import CabezaButton from '@/components/CabezaButton';
+import HelixirButton from '@/components/HelixirButton';
 import { Play } from 'lucide-react';
 
 const GameStart: React.FC = () => {
@@ -42,13 +42,13 @@ const GameStart: React.FC = () => {
           </p>
         </div>
         
-        <CabezaButton 
+        <HelixirButton 
           onClick={() => navigate('/card-pile')}
           className="w-full"
           icon={<Play size={20} />}
         >
           Commencer à jouer
-        </CabezaButton>
+        </HelixirButton>
       </div>
     </div>
   );
