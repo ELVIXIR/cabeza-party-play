@@ -4,7 +4,7 @@ import React from 'react';
 interface LogoProps {
   size?: 'small' | 'medium' | 'large';
   className?: string;
-  variant?: 'text' | 'image' | 'full';
+  variant?: 'text' | 'image';
 }
 
 const Logo: React.FC<LogoProps> = ({ 
@@ -22,16 +22,6 @@ const Logo: React.FC<LogoProps> = ({
     return (
       <img 
         src="/lovable-uploads/82a75a5c-ef69-4607-981c-5a2756782ca4.png"
-        alt="Hélixir"
-        className={`${sizeClasses[size]} ${className}`}
-      />
-    );
-  }
-
-  if (variant === 'full') {
-    return (
-      <img 
-        src="/lovable-uploads/3cd6069c-501a-48c5-9dd3-b7ce616e7b57.png"
         alt="Hélixir"
         className={`${sizeClasses[size]} ${className}`}
       />
