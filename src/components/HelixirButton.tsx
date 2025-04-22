@@ -24,7 +24,7 @@ const HelixirButton: React.FC<HelixirButtonProps> = ({
   type = 'button'
 }) => {
   const variantClasses = {
-    primary: 'bg-helixir-primary hover:bg-red-600 text-white',
+    primary: 'bg-helixir-primary hover:bg-helixir-accent text-white',
     secondary: 'bg-helixir-secondary hover:bg-yellow-500 text-black',
     outline: 'bg-transparent hover:bg-helixir-primary text-helixir-primary hover:text-white border-2 border-helixir-primary'
   };

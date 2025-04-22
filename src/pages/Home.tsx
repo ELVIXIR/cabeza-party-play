@@ -11,7 +11,7 @@ const Home: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-helixir-dark">
       <div className="animate-slide-up max-w-md w-full mx-auto text-center">
-        <Logo size="large" className="mb-12" />
+        <Logo variant="image" size="large" className="mb-12" />
         
         <div className="space-y-6">
           <HelixirButton 
