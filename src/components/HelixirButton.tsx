@@ -2,7 +2,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 
-interface CabezaButtonProps {
+interface HelixirButtonProps {
   children: React.ReactNode;
   onClick?: (e?: React.MouseEvent) => void;
   variant?: 'primary' | 'secondary' | 'outline';
@@ -13,7 +13,7 @@ interface CabezaButtonProps {
   type?: 'button' | 'submit' | 'reset';
 }
 
-const CabezaButton: React.FC<CabezaButtonProps> = ({
+const HelixirButton: React.FC<HelixirButtonProps> = ({
   children,
   onClick,
   variant = 'primary',
@@ -24,9 +24,9 @@ const CabezaButton: React.FC<CabezaButtonProps> = ({
   type = 'button'
 }) => {
   const variantClasses = {
-    primary: 'bg-cabeza-primary hover:bg-red-600 text-white',
-    secondary: 'bg-cabeza-secondary hover:bg-yellow-500 text-black',
-    outline: 'bg-transparent hover:bg-cabeza-primary text-cabeza-primary hover:text-white border-2 border-cabeza-primary'
+    primary: 'bg-helixir-primary hover:bg-red-600 text-white',
+    secondary: 'bg-helixir-secondary hover:bg-yellow-500 text-black',
+    outline: 'bg-transparent hover:bg-helixir-primary text-helixir-primary hover:text-white border-2 border-helixir-primary'
   };
   
   const sizeClasses = {
@@ -54,4 +54,4 @@ const CabezaButton: React.FC<CabezaButtonProps> = ({
   );
 };
 
-export default CabezaButton;
+export default HelixirButton;

@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -89,31 +88,30 @@
     @apply border-border;
   }
   body {
-    @apply bg-cabeza-dark text-cabeza-light;
+    @apply bg-helixir-dark text-helixir-light;
     font-family: 'Poppins', sans-serif;
   }
 }
 
 @layer components {
-  .cabeza-button {
-    @apply bg-cabeza-primary hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg;
+  .helixir-button {
+    @apply bg-helixir-primary hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg;
   }
   
-  .cabeza-card {
-    @apply bg-gradient-to-br from-cabeza-dark to-gray-900 rounded-xl p-5 shadow-xl border-2 border-cabeza-primary;
+  .helixir-card {
+    @apply bg-gradient-to-br from-helixir-dark to-gray-900 rounded-xl p-5 shadow-xl border-2 border-helixir-primary;
     perspective: 1000px;
   }
   
-  .cabeza-title {
-    @apply text-4xl font-extrabold text-cabeza-primary tracking-wider;
+  .helixir-title {
+    @apply text-4xl font-extrabold text-helixir-primary tracking-wider;
   }
   
-  .cabeza-subtitle {
-    @apply text-xl font-bold text-cabeza-secondary;
+  .helixir-subtitle {
+    @apply text-xl font-bold text-helixir-secondary;
   }
 }
 
-/* Animation for card flip */
 .card-inner {
   position: relative;
   width: 100%;

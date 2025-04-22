@@ -14,9 +14,9 @@ const Logo: React.FC<LogoProps> = ({ size = 'medium', className = '' }) => {
   };
   
   return (
-    <div className={`font-extrabold tracking-widest text-cabeza-primary ${sizeClasses[size]} ${className}`}>
-      CABEZA
-      <span className="animate-pulse-strong inline-block ml-1 text-cabeza-secondary">!</span>
+    <div className={`font-extrabold tracking-widest text-helixir-primary ${sizeClasses[size]} ${className}`}>
+      HÉLIXIR
+      <span className="animate-pulse-strong inline-block ml-1 text-helixir-secondary">!</span>
     </div>
   );
 };
