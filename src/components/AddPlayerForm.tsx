@@ -1,7 +1,6 @@
-
 import React, { useState } from 'react';
 import { useGame } from '@/context/GameContext';
-import CabezaButton from './CabezaButton';
+import HelixirButton from './HelixirButton';
 import { Plus } from 'lucide-react';
 
 const AddPlayerForm: React.FC = () => {
@@ -29,13 +28,13 @@ const AddPlayerForm: React.FC = () => {
         />
       </div>
       
-      <CabezaButton 
+      <HelixirButton 
         type="submit" 
         disabled={!playerName.trim() || players.length >= 12}
         icon={<Plus size={20} />}
       >
         Ajouter un joueur
-      </CabezaButton>
+      </HelixirButton>
     </form>
   );
 };
