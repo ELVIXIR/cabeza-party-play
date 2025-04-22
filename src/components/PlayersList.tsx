@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useGame } from '@/context/GameContext';
-import CabezaButton from './CabezaButton';
+import HelixirButton from './HelixirButton';
 import { Trash, User } from 'lucide-react';
 
 interface PlayersListProps {
@@ -41,14 +41,14 @@ const PlayersList: React.FC<PlayersListProps> = ({ allowRemove = true }) => {
               </div>
               
               {allowRemove && (
-                <CabezaButton 
+                <HelixirButton 
                   variant="outline" 
                   size="small" 
                   className="!p-1 min-w-8 !border-none"
                   onClick={() => removePlayer(player.id)}
                 >
                   <Trash size={16} />
-                </CabezaButton>
+                </HelixirButton>
               )}
             </li>
           ))}

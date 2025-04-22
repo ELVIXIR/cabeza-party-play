@@ -1,6 +1,6 @@
 
 import React from 'react';
-import CabezaButton from './CabezaButton';
+import HelixirButton from './HelixirButton';
 
 interface PartnerCardProps {
   name: string;
@@ -35,9 +35,9 @@ const PartnerCard: React.FC<PartnerCardProps> = ({
           <p className="text-lg font-bold text-cabeza-primary">{promoCode}</p>
         </div>
         
-        <CabezaButton onClick={handleVisit}>
+        <HelixirButton onClick={handleVisit}>
           Visiter la boutique
-        </CabezaButton>
+        </HelixirButton>
       </div>
     </div>
   );

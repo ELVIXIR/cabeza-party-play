@@ -2,7 +2,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from '@/components/Logo';
-import CabezaButton from '@/components/CabezaButton';
+import HelixirButton from '@/components/HelixirButton';
 import PartnerCard from '@/components/PartnerCard';
 import { ArrowLeft } from 'lucide-react';
 
@@ -38,14 +38,14 @@ const Partners: React.FC = () => {
     <div className="min-h-screen p-4 pt-6 bg-cabeza-dark">
       <div className="max-w-md mx-auto">
         <div className="flex items-center justify-between mb-8">
-          <CabezaButton 
+          <HelixirButton 
             variant="outline" 
             size="small"
             onClick={() => navigate('/home')}
             className="!p-2"
           >
             <ArrowLeft size={20} />
-          </CabezaButton>
+          </HelixirButton>
           <Logo size="medium" />
           <div className="w-10"></div> {/* Spacer for centering */}
         </div>

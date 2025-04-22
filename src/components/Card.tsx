@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { GameRule } from '@/lib/gameRules';
 import Logo from './Logo';
-import CabezaButton from './CabezaButton';
+import HelixirButton from './HelixirButton';
 
 interface CardProps {
   rule?: GameRule;
@@ -87,7 +87,7 @@ const Card: React.FC<CardProps> = ({
             
             {showButtons && (
               <div className="flex gap-3">
-                <CabezaButton 
+                <HelixirButton 
                   variant="outline" 
                   size="small"
                   onClick={(e) => {
@@ -96,9 +96,9 @@ const Card: React.FC<CardProps> = ({
                   }}
                 >
                   Retourner
-                </CabezaButton>
+                </HelixirButton>
                 
-                <CabezaButton 
+                <HelixirButton 
                   variant="primary" 
                   size="small"
                   onClick={(e) => {
@@ -107,7 +107,7 @@ const Card: React.FC<CardProps> = ({
                   }}
                 >
                   Joueur Suivant
-                </CabezaButton>
+                </HelixirButton>
               </div>
             )}
           </div>

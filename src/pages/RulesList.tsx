@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useGame } from '@/context/GameContext';
 import { getStandardRules, getPremiumRules } from '@/lib/gameRules';
 import Logo from '@/components/Logo';
-import CabezaButton from '@/components/CabezaButton';
+import HelixirButton from '@/components/HelixirButton';
 import Card from '@/components/Card';
 import { ArrowLeft, Lock, Filter, CheckSquare, Square } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
@@ -68,23 +68,23 @@ const RulesList: React.FC = () => {
     <div className="min-h-screen p-4 pt-6 bg-cabeza-dark">
       <div className="max-w-md mx-auto">
         <div className="flex items-center justify-between mb-6">
-          <CabezaButton 
+          <HelixirButton 
             variant="outline" 
             size="small"
             onClick={() => navigate('/home')}
             className="!p-2"
           >
             <ArrowLeft size={20} />
-          </CabezaButton>
+          </HelixirButton>
           <Logo size="medium" />
-          <CabezaButton
+          <HelixirButton
             variant="outline"
             size="small"
             onClick={() => setShowFilters(!showFilters)}
             className="!p-2"
           >
             <Filter size={20} />
-          </CabezaButton>
+          </HelixirButton>
         </div>
         
         <h1 className="text-2xl font-bold mb-4 text-center text-cabeza-secondary">
@@ -180,12 +180,12 @@ const RulesList: React.FC = () => {
                 <Lock size={48} className="mx-auto mb-4 text-cabeza-secondary" />
                 <h3 className="text-xl font-bold mb-2 text-cabeza-secondary">Contenu Premium</h3>
                 <p className="text-gray-300 mb-4">Débloquez des règles exclusives en passant à la version premium!</p>
-                <CabezaButton 
+                <HelixirButton 
                   variant="secondary"
                   onClick={() => navigate('/settings')}
                 >
                   Passer à la version Premium
-                </CabezaButton>
+                </HelixirButton>
               </div>
             ) : (
               visibleRules().map(rule => (
@@ -217,7 +217,7 @@ const RulesList: React.FC = () => {
         
         {Object.keys(selectedRules).filter(id => selectedRules[id]).length > 0 && (
           <div className="fixed bottom-4 left-0 right-0 flex justify-center">
-            <CabezaButton 
+            <HelixirButton 
               variant="primary"
               onClick={() => {
                 toast({
@@ -227,7 +227,7 @@ const RulesList: React.FC = () => {
               }}
             >
               Sauvegarder la sélection
-            </CabezaButton>
+            </HelixirButton>
           </div>
         )}
       </div>

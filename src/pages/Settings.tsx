@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGame } from '@/context/GameContext';
 import Logo from '@/components/Logo';
-import CabezaButton from '@/components/CabezaButton';
+import HelixirButton from '@/components/HelixirButton';
 import SettingItem from '@/components/SettingItem';
 import { Switch } from '@/components/ui/switch';
 import { ArrowLeft, Volume2, VolumeX, Globe, Shield, Info, Crown } from 'lucide-react';
@@ -23,14 +23,14 @@ const Settings: React.FC = () => {
     <div className="min-h-screen p-4 pt-6 bg-cabeza-dark">
       <div className="max-w-md mx-auto">
         <div className="flex items-center justify-between mb-8">
-          <CabezaButton 
+          <HelixirButton 
             variant="outline" 
             size="small"
             onClick={() => navigate('/home')}
             className="!p-2"
           >
             <ArrowLeft size={20} />
-          </CabezaButton>
+          </HelixirButton>
           <Logo size="medium" />
           <div className="w-10"></div> {/* Spacer for centering */}
         </div>
@@ -71,9 +71,9 @@ const Settings: React.FC = () => {
             title="Confidentialité"
             description="Gérer vos données personnelles"
           >
-            <CabezaButton variant="outline" size="small">
+            <HelixirButton variant="outline" size="small">
               Gérer
-            </CabezaButton>
+            </HelixirButton>
           </SettingItem>
           
           <SettingItem 
@@ -81,9 +81,9 @@ const Settings: React.FC = () => {
             title="Contacts"
             description="Nos réseaux sociaux"
           >
-            <CabezaButton variant="outline" size="small">
+            <HelixirButton variant="outline" size="small">
               Voir
-            </CabezaButton>
+            </HelixirButton>
           </SettingItem>
           
           <SettingItem 
